@@ -1,0 +1,56 @@
+{
+  "name": "Reaction",
+  "type": "object",
+  "properties": {
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "record",
+        "post"
+      ],
+      "description": "What is reacted to"
+    },
+    "target_id": {
+      "type": "string",
+      "description": "ID of the target record or post"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "like",
+        "celebrate",
+        "leaf"
+      ],
+      "default": "like",
+      "description": "Reaction kind"
+    }
+  },
+  "required": [
+    "target_type",
+    "target_id",
+    "kind"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

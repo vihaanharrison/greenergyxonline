@@ -1,0 +1,93 @@
+{
+  "name": "Challenge",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Challenge title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Concise description"
+    },
+    "reward_xp": {
+      "type": "number",
+      "default": 0,
+      "description": "XP reward on completion"
+    },
+    "material": {
+      "type": "string",
+      "enum": [
+        "plastic",
+        "paper",
+        "cardboard",
+        "glass",
+        "cans",
+        "textiles",
+        "compost",
+        "ewaste",
+        "other"
+      ],
+      "description": "Optional material restriction"
+    },
+    "target_quantity": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Target amount to complete"
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "kg",
+        "items",
+        "days"
+      ],
+      "default": "kg"
+    },
+    "cadence": {
+      "type": "string",
+      "enum": [
+        "week",
+        "lifetime"
+      ],
+      "default": "week",
+      "description": "Time window for progress"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "ended"
+      ],
+      "default": "active"
+    },
+    "accent": {
+      "type": "string",
+      "description": "Optional accent label e.g. featured"
+    }
+  },
+  "required": [
+    "title",
+    "reward_xp",
+    "target_quantity",
+    "unit"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

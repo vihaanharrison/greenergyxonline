@@ -1,0 +1,41 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "username": {
+      "type": "string",
+      "description": "Unique handle"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Short bio"
+    },
+    "avatar_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Avatar image"
+    },
+    "location": {
+      "type": "string",
+      "description": "Community / location"
+    },
+    "xp": {
+      "type": "number",
+      "default": 0,
+      "description": "Total XP"
+    },
+    "tier": {
+      "type": "string",
+      "description": "Current tier name"
+    },
+    "streak": {
+      "type": "number",
+      "default": 0,
+      "description": "Current recording streak in days"
+    }
+  }
+}

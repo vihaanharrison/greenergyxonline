@@ -1,0 +1,36 @@
+{
+  "name": "Follow",
+  "type": "object",
+  "properties": {
+    "following_id": {
+      "type": "string",
+      "description": "User id being followed"
+    }
+  },
+  "required": [
+    "following_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

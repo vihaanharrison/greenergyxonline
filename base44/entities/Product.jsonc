@@ -1,0 +1,58 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Product price"
+    },
+    "currency": {
+      "type": "string",
+      "default": "AED"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Product image"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "sold_out"
+      ],
+      "default": "available"
+    }
+  },
+  "required": [
+    "name",
+    "price"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

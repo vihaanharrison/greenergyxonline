@@ -1,0 +1,54 @@
+{
+  "name": "ChallengeParticipation",
+  "type": "object",
+  "properties": {
+    "challenge_id": {
+      "type": "string",
+      "description": "Challenge being participated in"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "joined",
+        "completed"
+      ],
+      "default": "joined"
+    },
+    "progress": {
+      "type": "number",
+      "default": 0,
+      "description": "Denormalized current progress"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the challenge was completed"
+    }
+  },
+  "required": [
+    "challenge_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

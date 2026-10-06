@@ -1,0 +1,50 @@
+{
+  "name": "CommunityPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Post title"
+    },
+    "body": {
+      "type": "string",
+      "description": "Post body content"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional post image"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Display name of the author at time of posting"
+    }
+  },
+  "required": [
+    "title",
+    "body"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

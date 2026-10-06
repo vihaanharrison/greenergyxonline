@@ -1,0 +1,72 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "User who receives the notification"
+    },
+    "actor_name": {
+      "type": "string",
+      "description": "Who triggered it"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "comment",
+        "reaction",
+        "follow",
+        "challenge",
+        "level",
+        "system"
+      ],
+      "description": "Notification kind"
+    },
+    "text": {
+      "type": "string",
+      "description": "Notification message"
+    },
+    "target_type": {
+      "type": "string",
+      "description": "Optional target kind"
+    },
+    "target_id": {
+      "type": "string",
+      "description": "Optional target id"
+    },
+    "read": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "user_id",
+    "type",
+    "text"
+  ],
+  "rls": {
+    "read": {
+      "data.user_id": "{{user.id}}"
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "data.user_id": "{{user.id}}"
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}"
+    }
+  }
+}

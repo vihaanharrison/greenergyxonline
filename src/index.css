@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* GreenergyX 2.0 — dark olive charcoal brand system */
+    --background: 75 8% 21%;          /* #393B31 */
+    --foreground: 55 18% 94%;        /* warm off-white */
+    --surface: 75 8% 21%;
+    --surface-card: 74 7% 25%;       /* #43453b lifted card */
+    --track: 74 7% 18%;
+    --earth: 108 33% 30%;            /* #3e6533 darker green */
+
+    --card: 74 7% 25%;
+    --card-foreground: 55 18% 94%;
+    --popover: 74 7% 23%;
+    --popover-foreground: 55 18% 94%;
+
+    --primary: 111 49% 48%;          /* #54b83f leaf green */
+    --primary-foreground: 75 8% 18%;
+    --secondary: 74 7% 28%;
+    --secondary-foreground: 55 18% 94%;
+    --muted: 74 7% 28%;
+    --muted-foreground: 78 8% 62%;   /* muted grey-green */
+    --accent: 108 33% 30%;           /* #3e6533 */
+    --accent-foreground: 55 18% 94%;
+    --positive: 111 49% 48%;
+    --destructive: 0 55% 50%;
+    --destructive-foreground: 55 18% 94%;
+    --border: 74 7% 32%;             /* thin muted border */
+    --input: 74 7% 32%;
+    --ring: 111 49% 48%;
+
+    --radius: 0.375rem;               /* 6px moderate corners */
+
+    --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    /* subtle brand dot-grid, like the reference asset */
+    background-image: radial-gradient(hsl(74 8% 38% / 0.16) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  #base44-badge,
+  .base44-edit-badge { display: none !important; }
+
+  .font-display { font-family: var(--font-display); }
+  .font-heading { font-family: var(--font-heading); }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* bold, compact, lowercase graphic headings — the brand voice */
+  .editorial-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  /* hard directional offset shadows — graphic, not blurry SaaS */
+  .shadow-hard { box-shadow: 3px 3px 0 0 hsl(74 8% 13%); }
+  .shadow-hard-sm { box-shadow: 2px 2px 0 0 hsl(74 8% 13%); }
+  .shadow-hard-green { box-shadow: 3px 3px 0 0 hsl(111 45% 32%); }
+  .shadow-hard-lg { box-shadow: 5px 5px 0 0 hsl(74 8% 13%); }
+
+  .press { transition: transform .08s ease, box-shadow .08s ease; }
+  .press:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 hsl(74 8% 13%); }
+  .press-hard { transition: transform .08s ease, box-shadow .08s ease; }
+  .press-hard:active { transform: translate(3px, 3px); box-shadow: 0 0 0 0 transparent; }
+
+  .dot-grid {
+    background-image: radial-gradient(hsl(74 8% 40% / 0.20) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}

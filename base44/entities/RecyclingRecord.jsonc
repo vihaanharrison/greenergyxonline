@@ -1,0 +1,112 @@
+{
+  "name": "RecyclingRecord",
+  "type": "object",
+  "properties": {
+    "material": {
+      "type": "string",
+      "enum": [
+        "plastic",
+        "paper",
+        "cardboard",
+        "glass",
+        "cans",
+        "textiles",
+        "compost",
+        "ewaste",
+        "other"
+      ],
+      "description": "Recyclable material category"
+    },
+    "quantity": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Amount recycled"
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "kg",
+        "g",
+        "items"
+      ],
+      "default": "kg"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the recycling action"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional caption / notes"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional photo of the recyclables"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "private"
+      ],
+      "default": "public"
+    },
+    "location": {
+      "type": "string",
+      "description": "Optional community / location context"
+    },
+    "contributor_name": {
+      "type": "string",
+      "description": "Display name of the contributor at time of recording"
+    },
+    "xp_earned": {
+      "type": "number",
+      "default": 0,
+      "description": "XP awarded for this record"
+    },
+    "challenge_id": {
+      "type": "string",
+      "description": "Optional related challenge"
+    }
+  },
+  "required": [
+    "material",
+    "quantity",
+    "unit",
+    "date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.visibility": "public"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

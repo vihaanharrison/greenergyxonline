@@ -1,0 +1,55 @@
+{
+  "name": "XPTransaction",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "number",
+      "description": "XP delta (positive)"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Human-readable reason"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "record",
+        "challenge",
+        "milestone"
+      ],
+      "description": "What caused the XP change"
+    },
+    "source_id": {
+      "type": "string",
+      "description": "ID of the source record / challenge"
+    }
+  },
+  "required": [
+    "amount",
+    "reason",
+    "source_type"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}
